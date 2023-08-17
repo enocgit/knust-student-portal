@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 
 const config: Config = {
   content: [
@@ -8,6 +10,11 @@ const config: Config = {
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens: {
+      "xxs": "160px",
+      "xs": "420px",
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         // PRIMARY GREEN

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import sidebarMenus from "@/elementContents/sidebarMenus";
+import BottomDrawer from "./BottomDrawer";
 
 type Props = {
   children?: React.ReactNode;
@@ -18,7 +19,7 @@ const Sidebar = ({ children }: Props) => {
     <>
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidebar"
       >
         <div className="h-full pl-3 py-4 overflow-y-auto bg-white dark:bg-gray-800">
@@ -44,7 +45,13 @@ const Sidebar = ({ children }: Props) => {
               const { path, name, icon, activeStateBg, activeStateText } =
                 sidebarMenu;
               return (
-                <li key={index} className={`relative ${pathname === path && "bg-neutral-50 pr-2 py-2 rounded-l-xl"}`}>
+                <li
+                  key={index}
+                  className={`relative ${
+                    pathname === path &&
+                    "bg-grayscale-100 pr-2 py-2 rounded-l-xl"
+                  }`}
+                >
                   <a
                     href={path}
                     className="flex items-center p-2 gap-3 text-black/100 font-[400] rounded-lg dark:text-white dark:hover:bg-gray-700"
@@ -61,9 +68,13 @@ const Sidebar = ({ children }: Props) => {
         </div>
       </aside>
 
-      <div className="p-4 sm:ml-64">
+      <div className="p-4 md:ml-64">
         <div className="mt-14 p-2">{children}</div>
       </div>
+
+      {/* Drawer smaller screens */}
+
+      <BottomDrawer />
     </>
   );
 };

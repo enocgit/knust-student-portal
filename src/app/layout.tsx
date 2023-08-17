@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={`${nunito.className} bg-neutral-50`}>
+      <body className={`${nunito.className} bg-grayscale-100`}>
         <SideNav>
           {children}
         </SideNav>
