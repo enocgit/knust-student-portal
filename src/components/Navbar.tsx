@@ -6,6 +6,7 @@ import navbarMenus from "@/elementContents/navbarMenus";
 import { HiBell } from "react-icons/hi";
 import Dropdown from "./Dropdown";
 import Link from "next/link";
+import Breadcrumb from "./Breadcrumb";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const Navbar = (props: Props) => {
 
   
   // USEREF
-  const userRef = useRef(null)
+  const userRef = useRef<HTMLButtonElement>(null)
 
   // HANDLERS
   const toggleDropdown = () => {
@@ -30,9 +31,9 @@ const Navbar = (props: Props) => {
   
   // USEFFECT
   useEffect(() => {
-    const handler = (e) => {
+    const handler = (e: any) => {
       if (userRef.current){
-        if (!userRef.current.contains(e.target)) {
+        if (!userRef?.current.contains(e.target)) {
           closeDropdown()
           console.log(userRef.current)
         }
@@ -40,7 +41,7 @@ const Navbar = (props: Props) => {
       alert(2)
     }
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", (e: any) => {
       if (userRef.current){
         if (!userRef.current.contains(e.target)) {
           closeDropdown()
@@ -63,7 +64,8 @@ const Navbar = (props: Props) => {
               style={{ objectFit: "contain" }}
             />
           </div>
-          <Link href="/dashboard" className="text-base font-[600] hidden min-[260px]:inline-flex">Dashboard</Link>
+          {/* <Link href="/dashboard" className="text-base font-[600] hidden min-[260px]:inline-flex">Dashboard</Link> */}
+          <Breadcrumb />
         </div>
         <div className="relative flex items-center justify-center gap-4">
           <div className="flex items-center order-2" id="user-menu">
@@ -72,9 +74,6 @@ const Navbar = (props: Props) => {
               type="button"
               className="flex text-sm rounded-full sm:mr-3 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
-              aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
               onClick={toggleDropdown}
               ref={userRef}
             >

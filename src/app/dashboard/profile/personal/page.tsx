@@ -23,6 +23,7 @@ const ProfilePage = (props: Props) => {
         </div>
         <form action="" className="space-y-5">
           <div className="grid gap-5 lg:grid-cols-2 min-[1250px]:grid-cols-3">
+            {/* Title */}
             <div>
               <Label htmlFor="title" text="Title"/>
               <Select id="title" disabled value="mrs">
@@ -30,14 +31,17 @@ const ProfilePage = (props: Props) => {
                 <Option text="Mrs" value="mrs" />
               </Select>
             </div>
+            {/* First name */}
             <div>
               <Label htmlFor="first_name" text="First name" />
               <Input type="text" name="first_name" disabled defaultValue="Joan" />
             </div>
+            {/* Other names */}
             <div>
               <Label htmlFor="other_names" text="Other names" />
               <Input type="text" name="other_names" disabled defaultValue="Doe" />
             </div>
+            {/* Gender */}
             <div>
               <Label htmlFor="gender" text="Gender" />
               <Input type="text" name="gender" disabled defaultValue="Female" />

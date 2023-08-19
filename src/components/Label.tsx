@@ -10,7 +10,7 @@ const Label: React.FC<Props & LabelHTMLAttributes<HTMLLabelElement>> = ({text, h
   return (
     <label
       htmlFor={htmlFor}
-      className={`block mb-2 text-sm font-medium text-gray-900 dark:text-white ${className}`}
+      className={`block mb-2 text-sm normal-case font-medium text-gray-900 dark:text-white ${className}`}
       {...rest}
     >
       {text}
