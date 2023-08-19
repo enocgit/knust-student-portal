@@ -1,14 +1,55 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import navbarMenus from "@/elementContents/navbarMenus";
 import { HiBell } from "react-icons/hi";
+import Dropdown from "./Dropdown";
+import Link from "next/link";
 
 type Props = {};
 
 const Navbar = (props: Props) => {
   const pathname = usePathname();
+
+  // USESTATE
+  const [dropdownIsVisible, setDropdownIsVisible] = useState<boolean>(false)
+
+  
+  // USEREF
+  const userRef = useRef(null)
+
+  // HANDLERS
+  const toggleDropdown = () => {
+    setDropdownIsVisible((prevState) => !prevState)
+  }
+
+  const closeDropdown = () => {
+    setDropdownIsVisible(false)
+  }
+  
+  // USEFFECT
+  useEffect(() => {
+    const handler = (e) => {
+      if (userRef.current){
+        if (!userRef.current.contains(e.target)) {
+          closeDropdown()
+          console.log(userRef.current)
+        }
+      }
+      alert(2)
+    }
+
+    document.addEventListener("click", (e) => {
+      if (userRef.current){
+        if (!userRef.current.contains(e.target)) {
+          closeDropdown()
+        }
+      }
+    })
+
+    return document.removeEventListener("click", handler)
+  }, []);
 
   return (
     <nav className="fixed top-0 z-50 md:ml-[16rem] bg-white/90 backdrop-blur-sm border-b border-gray-200 w-screen md:w-[calc(100vw-16rem)] dark:bg-gray-800 dark:border-gray-700">
@@ -22,18 +63,20 @@ const Navbar = (props: Props) => {
               style={{ objectFit: "contain" }}
             />
           </div>
-          <h1 className="text-base font-[600] hidden min-[260px]:inline-flex">Dashboard</h1>
+          <Link href="/dashboard" className="text-base font-[600] hidden min-[260px]:inline-flex">Dashboard</Link>
         </div>
-        <div className="flex items-center justify-center gap-4">
-          <div className="flex items-center md:order-2">
+        <div className="relative flex items-center justify-center gap-4">
+          <div className="flex items-center order-2" id="user-menu">
             {/* Student picture */}
             <button
               type="button"
-              className="flex mr-3 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              className="flex text-sm rounded-full sm:mr-3 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
               aria-expanded="false"
               data-dropdown-toggle="user-dropdown"
               data-dropdown-placement="bottom"
+              onClick={toggleDropdown}
+              ref={userRef}
             >
               <span className="sr-only">Open user menu</span>
               <div className="relative w-8 h-8 rounded-full">
@@ -41,7 +84,9 @@ const Navbar = (props: Props) => {
               </div>
             </button>
             {/* Dropdown items */}
-           
+            <Dropdown 
+              isVisible={dropdownIsVisible}
+            />
             {/* Hamburger */}
             {/* <button
               data-collapse-toggle="navbar-user"
@@ -69,10 +114,10 @@ const Navbar = (props: Props) => {
             </button> */}
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className="flex items-center justify-between w-full md:w-auto"
             id="navbar-user"
           >
-            <ul className="flex flex-col p-4 md:p-0 text-sm mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-row p-1 md:p-0 text-sm border border-gray-100 rounded-lg bg-gray-50 md:space-x-4 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li className="relative">
                 <HiBell className="text-xl" />
                 <span className="sr-only">Notifications</span>
@@ -82,13 +127,13 @@ const Navbar = (props: Props) => {
               {navbarMenus.map((navbarMenu, index) => {
                 const { path, name } = navbarMenu;
                 return (
-                  <li key={index}>
-                    <a
+                  <li key={index} className="hidden md:block">
+                    <Link
                       href={path}
                       className="block py-2 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-success md:p-0 dark:text-white md:dark:hover:text-success dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                     >
                       {name}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}

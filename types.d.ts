@@ -22,9 +22,15 @@ interface SidebarMenuInterface {
     name: string;
   }) => JSX.Element;
 }
-
-
 interface WelcomeCardInterface {
   firstName: string;
   className?: string;
 }
+
+interface ActivityCardInterface {
+  className?: string;
+  icon: JSX.Element
+  iconBackground: string;
+  name: string;
+  path: string;
+};

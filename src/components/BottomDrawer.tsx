@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { HiCursorClick } from "react-icons/hi";
 import sidebarMenus from "@/elementContents/sidebarMenus";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type Props = {};
 
@@ -32,7 +33,8 @@ const BottomDrawer = (props: Props) => {
         data-drawer-toggle="drawer-swipe"
         onClick={toggleDrawer}
       >
-        <span className="absolute w-8 h-1 -translate-x-1/2 bg-gray-300 rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+        <span className="absolute w-8 h-1 -translate-x-1/2 bg-success rounded-lg top-3 left-1/2 dark:bg-gray-600"></span>
+        
         <h5
           id="drawer-swipe-label"
           className="flex space-x-2 items-center text-base text-gray-500 dark:text-gray-400 font-medium"
@@ -40,8 +42,8 @@ const BottomDrawer = (props: Props) => {
           <HiCursorClick className="text-xl" />
           <div>
             {isDrawerOpen
-              ? "Click to close settings"
-              : "Click to open settings"}
+              ? "Click to close menu"
+              : "Click to open menu"}
           </div>
         </h5>
       </div>
@@ -49,7 +51,7 @@ const BottomDrawer = (props: Props) => {
         {sidebarMenus.map((sidebarMenu, index) => {
           const { name, path, icon } = sidebarMenu;
           return (
-            <a href={path} key={index}>
+            <Link href={path} key={index}>
               <div
                 className="p-4  rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 dark:bg-gray-700"
               >
@@ -62,7 +64,7 @@ const BottomDrawer = (props: Props) => {
                   </div>
                 </div>
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

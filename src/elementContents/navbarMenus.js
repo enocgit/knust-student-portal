@@ -6,7 +6,7 @@ const navbarMenus = [
     },
     {
         "id": 2,
-        "name": "Logout",
+        "name": "Sign out",
         "path": "/logout"
     },
 ]

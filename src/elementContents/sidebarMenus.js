@@ -7,28 +7,28 @@ import {
 
 const sidebarMenus = [
   {
-    path: "/",
+    path: "/dashboard",
     name: "Dashboard",
     icon: ({ pathname, path }) => {
       return (
         <HiChartPie
           className={`relative z-10 text-xl ${
-            pathname === path && "text-success"
+            pathname.includes(path) && "text-success"
           }`}
         />
       );
     },
     activeStateBg: ({ pathname, path }) => {
-      if (pathname === path) {
+      if (pathname.includes(path)) {
         return (
-          <div className="absolute left-[-0.15rem] bg-white h-10 w-10 rounded-lg shadow-lg"></div>
+          <div className="absolute -translate-x-2 bg-white h-10 w-10 rounded-lg shadow-lg sidebar-menu__active"></div>
         );
       }
     },
     activeStateText: ({ pathname, path, name }) => {
       return (
         <span
-          className={`ml-1 font-[200] ${pathname === path && "text-black"}`}
+          className={`ml-1 font-[200] ${pathname.includes(path) && "text-black"}`}
         >
           {name}
         </span>
@@ -50,7 +50,7 @@ const sidebarMenus = [
     activeStateBg: ({ pathname, path }) => {
       if (pathname.includes(path)) {
         return (
-          <div className="absolute left-[-0.15rem] bg-white h-10 w-10 rounded-lg shadow-lg"></div>
+          <div className="absolute -translate-x-2 bg-white h-10 w-10 rounded-lg shadow-lg sidebar-menu__active"></div>
         );
       }
     },
@@ -81,7 +81,7 @@ const sidebarMenus = [
     activeStateBg: ({ pathname, path }) => {
       if (pathname.includes(path)) {
         return (
-          <div className="absolute left-[-0.15rem] bg-white h-10 w-10 rounded-lg shadow-lg"></div>
+          <div className="absolute -translate-x-2 bg-white h-10 w-10 rounded-lg shadow-lg sidebar-menu__active"></div>
         );
       }
     },
@@ -112,7 +112,7 @@ const sidebarMenus = [
     activeStateBg: ({ pathname, path }) => {
       if (pathname.includes(path)) {
         return (
-          <div className="absolute left-[-0.15rem] bg-white h-10 w-10 rounded-lg shadow-lg"></div>
+          <div className="absolute -translate-x-2 bg-white h-10 w-10 rounded-lg shadow-lg sidebar-menu__active"></div>
         );
       }
     },

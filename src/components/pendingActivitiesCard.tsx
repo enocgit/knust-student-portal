@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { HiPuzzle } from "react-icons/hi";
+import { HiOutlineChevronLeft, HiOutlineChevronRight, HiPuzzle } from "react-icons/hi";
 
 type Props = {
     className?: string;
@@ -8,7 +8,7 @@ type Props = {
 
 const PendingActivitiesCard = ({className}: Props) => {
   return (
-    <div className={`relative card w-[20rem] bg-white shadow-md space-y-4 px-8 py-6 activity-card ${className}`}>
+    <div className={`relative card max-w-[30rem] bg-white shadow-md space-y-4 px-8 py-6 activity-card ${className}`}>
       <h1 className="text-base text-black font-bold">Pending Activities</h1>
       <div className="flex flex-row gap-2">
         <div className="bg-orange-100 h-12 w-16 rounded-md flex items-center justify-center">
@@ -18,6 +18,14 @@ const PendingActivitiesCard = ({className}: Props) => {
           <p className="text-black/100">Complete Lecturer Assessment to see your result</p>
           <small className="text-black/100">5d ago</small>
         </div>
+      </div>
+      <div className="space-x-2 border-black/100 text-black/100 ml-auto">
+        <button className="btn btn-circle btn-outline btn-xs p-1 hover:bg-warning">
+          <HiOutlineChevronLeft className="text-xs" />
+        </button>
+        <button className="btn btn-circle btn-outline btn-xs p-1 hover:bg-warning">
+          <HiOutlineChevronRight className="text-xs" />
+        </button>
       </div>
     </div>
   );
